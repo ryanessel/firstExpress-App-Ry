@@ -1,36 +1,37 @@
 const mongoose = require('mongoose');
 
 // =============  This Makes up Your Model (Schema) File ============
-const { Schema, model } = mongoose;
+// const { Schema, model } = mongoose;
 
-const catSchema = new Schema({
-    name: String,
-    isMale: {
-        type: Boolean,
-        default: false,
-    },
-    isFemale: {
-        type: Boolean,
-        default: false
-    },
-    color: { 
-        type: String,
-        default: 'Black',
-        enum: ['Black', 'Gray', 'White', 'Orange', 'Pink']
-    },
-    siblings: {type: [{type: Schema.Types.ObjectId, ref: 'Cat'}]}
-}, {
-    timestamps: true
-    // timestamps: {
-    //     createdAt: 'created_at',
-    //     updatedAt: 'updated_at'
-    // }
-})
+// const catSchema = new Schema({
+//     name: String,
+//     isMale: {
+//         type: Boolean,
+//         default: false,
+//     },
+//     isFemale: {
+//         type: Boolean,
+//         default: false
+//     },
+//     color: { 
+//         type: String,
+//         default: 'Black',
+//         enum: ['Black', 'Gray', 'White', 'Orange', 'Pink']
+//     },
+//     siblings: {type: [{type: Schema.Types.ObjectId, ref: 'Cat'}]}
+// }, {
+//     timestamps: true
+//     // timestamps: {
+//     //     createdAt: 'created_at',
+//     //     updatedAt: 'updated_at'
+//     // }
+// })
 
-const Cat = model('Cat', catSchema);
-// place export code here when we move this
+// const Cat = model('Cat', catSchema);
+// // place export code here when we move this
 
-
+// the above code is now located in the models folder in the Cat.js file
+const Cat = require('../models/Cat');
 
 // ===============================================================
 
@@ -147,7 +148,7 @@ const oneCat = {
 
 Cat.findById("631a7fd0dd4a3024884f5f26").then(soonToBeGoneCatFromDb => {
     console.log({soonToBeGoneCatFromDb});
-    
+
     Cat.findByIdAndRemove("631a7fd0dd4a3024884f5f26").then(() => {
         console.log(`You Have Forcefully Removed ${soonToBeGoneCatFromDb.name} from your database. Good Job!!`)
         mongoose.disconnect();
